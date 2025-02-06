@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnc18kgr4umpk"]
+
+[ext_resource type="PackedScene" uid="uid://depmb8nkigylh" path="res://player.tscn" id="1_a3mwd"]
+[ext_resource type="PackedScene" uid="uid://cv4vv7cbc1d0r" path="res://art/environment/Daisy.fbx" id="2_ixomo"]
+[ext_resource type="Script" path="res://camera_3d.gd" id="2_vockb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ufbyf"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1us08"]
+size = Vector2(100, 100)
+
+[node name="Main" type="Node"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_ufbyf")
+
+[node name="Plane" type="MeshInstance3D" parent="Ground/CollisionShape3D"]
+mesh = SubResource("PlaneMesh_1us08")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 15, 20)
+shadow_enabled = true
+
+[node name="Daisy" parent="." instance=ExtResource("2_ixomo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 18)
+
+[node name="Player" parent="." instance=ExtResource("1_a3mwd")]
+
+[node name="CameraPivot" type="Marker3D" parent="Player"]
+transform = Transform3D(-1, -1.50996e-07, -6.60024e-15, 0, -4.37114e-08, 1, -1.50996e-07, 1, 4.37114e-08, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot"]
+transform = Transform3D(1, 6.4796e-08, 8.44438e-08, 6.4796e-08, 0.258819, -0.965926, -8.44438e-08, 0.965926, 0.258819, 5.15794e-06, -50, 17)
+doppler_tracking = 2
+projection = 1
+size = 30.0
+script = ExtResource("2_vockb")
