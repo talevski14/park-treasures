@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dnc18kgr4umpk"]
+[gd_scene load_steps=9 format=3 uid="uid://dnc18kgr4umpk"]
 
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_37plf"]
 [ext_resource type="PackedScene" uid="uid://depmb8nkigylh" path="res://scenes/player.tscn" id="1_a3mwd"]
 [ext_resource type="PackedScene" uid="uid://cv4vv7cbc1d0r" path="res://art/environment/Daisy.fbx" id="2_ixomo"]
-[ext_resource type="Script" path="res://scripts/camera_3d.gd" id="3_g05p4"]
 [ext_resource type="PackedScene" uid="uid://cqfa5lr7ia3v3" path="res://scenes/treasure.tscn" id="4_x6v1r"]
+[ext_resource type="Script" path="res://scripts/camera_pivot.gd" id="5_ggr46"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ufbyf"]
 size = Vector3(60, 2, 60)
@@ -11,7 +12,16 @@ size = Vector3(60, 2, 60)
 [sub_resource type="BoxMesh" id="BoxMesh_w0rou"]
 size = Vector3(100, 2, 100)
 
+[sub_resource type="Curve3D" id="Curve3D_fnw5v"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -40.0078, 9, -41.9532, 0, 0, 0, 0, 0, 0, 34.8524, 9, -42.2911, 0, 0, 0, 0, 0, 0, 37.3872, 9, 36.9627, 0, 0, 0, 0, 0, 0, -37.1351, 9, 35.4418, 0, 0, 0, 0, 0, 0, -37.304, 9, -27.2515, 0, 0, 0, 0, 0, 0, 24.0374, 9, -28.0964, 0, 0, 0, 0, 0, 0, 26.0652, 9, 25.3027, 0, 0, 0, 0, 0, 0, -25.3061, 9, 25.6407, 0, 0, 0, 0, 0, 0, -26.1511, 9, -16.2675, 0, 0, 0, 0, 0, 0, 15.2502, 9, -16.6055, 0, 0, 0, 0, 0, 0, 17.447, 9, 16.5155, 0, 0, 0, 0, 0, 0, -40.0078, 9, -41.9532),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 12
+
 [node name="Main" type="Node"]
+script = ExtResource("1_37plf")
+treasure_scene = ExtResource("4_x6v1r")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -31,19 +41,27 @@ shadow_enabled = true
 [node name="Daisy" parent="." instance=ExtResource("2_ixomo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 18)
 
-[node name="Player" parent="." instance=ExtResource("1_a3mwd")]
+[node name="Player" parent="." node_paths=PackedStringArray("pivot") instance=ExtResource("1_a3mwd")]
+pivot = NodePath("CameraPivot")
 
 [node name="CameraPivot" type="Marker3D" parent="Player"]
-transform = Transform3D(-1, -1.50996e-07, -6.60024e-15, 0, -4.37114e-08, 1, -1.50996e-07, 1, 4.37114e-08, 0, 0, 0)
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
+script = ExtResource("5_ggr46")
 
 [node name="Camera3D" type="Camera3D" parent="Player/CameraPivot"]
 transform = Transform3D(1, 6.4796e-08, 8.44438e-08, 6.4796e-08, 0.258819, -0.965926, -8.44438e-08, 0.965926, 0.258819, 5.15794e-06, -50, 17)
 doppler_tracking = 2
 projection = 1
 size = 30.0
-script = ExtResource("3_g05p4")
 
 [node name="Treasure" parent="." instance=ExtResource("4_x6v1r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 10, 2)
 
+[node name="SpawnPath" type="Path3D" parent="."]
+curve = SubResource("Curve3D_fnw5v")
+
+[node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
+transform = Transform3D(0.00451475, 0, -0.99999, 0, 1, 0, 0.99999, 0, 0.00451475, -40.0078, 9, -41.9532)
+
+[connection signal="collected" from="Treasure" to="." method="_on_treasure_collected"]
 [connection signal="collected" from="Treasure" to="Player" method="_on_treasure_collected"]
