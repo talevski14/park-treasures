@@ -1,24 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnc18kgr4umpk"]
+[gd_scene load_steps=7 format=3 uid="uid://dnc18kgr4umpk"]
 
 [ext_resource type="PackedScene" uid="uid://depmb8nkigylh" path="res://scenes/player.tscn" id="1_a3mwd"]
 [ext_resource type="PackedScene" uid="uid://cv4vv7cbc1d0r" path="res://art/environment/Daisy.fbx" id="2_ixomo"]
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="3_g05p4"]
+[ext_resource type="PackedScene" uid="uid://cqfa5lr7ia3v3" path="res://scenes/treasure.tscn" id="4_x6v1r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ufbyf"]
 size = Vector3(60, 2, 60)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_1us08"]
-size = Vector2(100, 100)
+[sub_resource type="BoxMesh" id="BoxMesh_w0rou"]
+size = Vector3(100, 2, 100)
 
 [node name="Main" type="Node"]
 
 [node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_ufbyf")
 
 [node name="Plane" type="MeshInstance3D" parent="Ground/CollisionShape3D"]
-mesh = SubResource("PlaneMesh_1us08")
+mesh = SubResource("BoxMesh_w0rou")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 15, 20)
@@ -38,3 +42,8 @@ doppler_tracking = 2
 projection = 1
 size = 30.0
 script = ExtResource("3_g05p4")
+
+[node name="Treasure" parent="." instance=ExtResource("4_x6v1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 10, 2)
+
+[connection signal="collected" from="Treasure" to="Player" method="_on_treasure_collected"]

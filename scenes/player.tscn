@@ -4,11 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://bvqtayrgtvpqy" path="res://art/character/StylizedCharacter.fbx" id="2_k6mbt"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hmh3a"]
-height = 18.0
+height = 20.0
 radius = 4.0
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 15, 0)
+collision_mask = 6
 script = ExtResource("1_kxigp")
 
 [node name="Pivot" type="Node3D" parent="."]
