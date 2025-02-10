@@ -4,4 +4,4 @@ var score = 0
 
 func _on_treasure_collected():
 	score += 1
-	text = "Score: %s" % score
+	text = "%s" % score

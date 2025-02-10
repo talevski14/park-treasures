@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://b712dxlrxdl2o"]
+
+[ext_resource type="PackedScene" uid="uid://cc4sim6mwuj4l" path="res://art/environment/Tree_Green_02.fbx" id="1_kbibf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ixq5a"]
+radius = 6.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lfm16"]
+size = Vector3(8.46771, 1, 8.40256)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ywy0l"]
+size = Vector3(2.03381, 5.4519, 2.66748)
+
+[node name="Tree" type="StaticBody3D"]
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Tree_Green_02" parent="Pivot" instance=ExtResource("1_kbibf")]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.1539, 0)
+shape = SubResource("SphereShape3D_ixq5a")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.246733, 0.516845, -0.0651096)
+shape = SubResource("BoxShape3D_lfm16")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0103149, 3.34778, 0.083252)
+shape = SubResource("BoxShape3D_ywy0l")

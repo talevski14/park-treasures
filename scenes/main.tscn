@@ -1,21 +1,47 @@
-[gd_scene load_steps=15 format=3 uid="uid://dnc18kgr4umpk"]
+[gd_scene load_steps=28 format=3 uid="uid://dnc18kgr4umpk"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_37plf"]
 [ext_resource type="PackedScene" uid="uid://depmb8nkigylh" path="res://scenes/player.tscn" id="1_a3mwd"]
 [ext_resource type="PackedScene" uid="uid://7vrnsqjmxgfm" path="res://scenes/treasure1.tscn" id="2_1m283"]
-[ext_resource type="PackedScene" uid="uid://cv4vv7cbc1d0r" path="res://art/environment/Daisy.fbx" id="2_ixomo"]
 [ext_resource type="PackedScene" uid="uid://dfchdsl67gow7" path="res://scenes/treasure2.tscn" id="3_pbxxw"]
 [ext_resource type="PackedScene" uid="uid://cqfa5lr7ia3v3" path="res://scenes/treasure3.tscn" id="4_x6v1r"]
 [ext_resource type="Script" path="res://scripts/camera_pivot.gd" id="5_ggr46"]
 [ext_resource type="PackedScene" uid="uid://dh0ijdxhyept2" path="res://scenes/treasure4.tscn" id="5_spet3"]
 [ext_resource type="Script" path="res://scripts/score_label.gd" id="6_35e46"]
 [ext_resource type="PackedScene" uid="uid://c8y1bkmnvqopw" path="res://scenes/treasure5.tscn" id="6_vywc3"]
+[ext_resource type="PackedScene" uid="uid://ctpnvf4bo753u" path="res://scenes/environment_elements/tree1.tscn" id="11_2cgoo"]
+[ext_resource type="PackedScene" uid="uid://b712dxlrxdl2o" path="res://scenes/environment_elements/tree2.tscn" id="11_s84n1"]
+[ext_resource type="PackedScene" uid="uid://djacnwvr2bpa2" path="res://scenes/environment_elements/tree3.tscn" id="12_8vnbs"]
+[ext_resource type="PackedScene" uid="uid://djsn7eekex8ni" path="res://scenes/environment_elements/tree4.tscn" id="13_wt7l6"]
+[ext_resource type="PackedScene" uid="uid://bqqgh3cdophgx" path="res://scenes/environment_elements/bench.tscn" id="14_mtyi4"]
+[ext_resource type="PackedScene" uid="uid://i2di4n1e3src" path="res://scenes/environment_elements/flower.tscn" id="15_37vau"]
+[ext_resource type="PackedScene" uid="uid://bhtbyfahwpw18" path="res://scenes/environment_elements/rock1.tscn" id="16_al4ye"]
+[ext_resource type="PackedScene" uid="uid://v4vdnhosabj2" path="res://scenes/environment_elements/rock2.tscn" id="17_eg38s"]
+[ext_resource type="PackedScene" uid="uid://jet8d67ymx8h" path="res://scenes/environment_elements/rock3.tscn" id="18_jb3al"]
+[ext_resource type="PackedScene" uid="uid://di4d6ptxyhvmb" path="res://scenes/environment_elements/plant.tscn" id="19_qmplu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ufbyf"]
-size = Vector3(100, 2, 100)
+size = Vector3(300, 2, 300)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gis1g"]
+size = Vector3(8, 65, 310)
 
 [sub_resource type="BoxMesh" id="BoxMesh_xuva8"]
-size = Vector3(100, 2, 100)
+size = Vector3(300, 2, 300)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n2n58"]
+noise_type = 0
+seed = 14
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hyocw"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_n2n58")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xvsv4"]
+albedo_color = Color(0.216619, 0.383158, 0.143435, 1)
+metallic_specular = 0.0
+roughness_texture = SubResource("NoiseTexture2D_hyocw")
+roughness_texture_channel = 1
 
 [sub_resource type="Curve3D" id="Curve3D_fnw5v"]
 _data = {
@@ -43,32 +69,47 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_ufbyf")
 
-[node name="Plane" type="MeshInstance3D" parent="Ground/CollisionShape3D"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 149.5, 31, -0.5)
+shape = SubResource("BoxShape3D_gis1g")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -149.5, 31, -0.5)
+shape = SubResource("BoxShape3D_gis1g")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 0.5, 31, -152.5)
+shape = SubResource("BoxShape3D_gis1g")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 0.5, 31, 149.5)
+shape = SubResource("BoxShape3D_gis1g")
+
+[node name="Plane" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("BoxMesh_xuva8")
+skeleton = NodePath("../CollisionShape3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_xvsv4")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 15, 20)
 shadow_enabled = true
-
-[node name="Daisy" parent="." instance=ExtResource("2_ixomo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 18)
 
 [node name="Player" parent="." node_paths=PackedStringArray("pivot", "gem") groups=["player"] instance=ExtResource("1_a3mwd")]
 pivot = NodePath("CameraPivot")
 gem = NodePath("../Treasure")
 
 [node name="CameraPivot" type="Marker3D" parent="Player"]
-transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0, 0, 0)
 script = ExtResource("5_ggr46")
 
 [node name="Camera3D" type="Camera3D" parent="Player/CameraPivot"]
-transform = Transform3D(1, 6.4796e-08, 8.44438e-08, 6.4796e-08, 0.258819, -0.965926, -8.44438e-08, 0.965926, 0.258819, 5.15794e-06, -50, 17)
+transform = Transform3D(1, 0, 0, 0, 0.139173, -0.990268, 0, 0.990268, 0.139173, 5.15794e-06, -50, 17)
 doppler_tracking = 2
 projection = 1
 size = 30.0
 
 [node name="Treasure" parent="." instance=ExtResource("4_x6v1r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 10, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, -25)
 
 [node name="SpawnPath" type="Path3D" parent="."]
 curve = SubResource("Curve3D_fnw5v")
@@ -88,11 +129,11 @@ grow_vertical = 2
 layout_mode = 0
 offset_left = 44.0
 offset_top = 30.0
-offset_right = 232.0
+offset_right = 152.0
 offset_bottom = 99.0
 theme = SubResource("Theme_q12iw")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Score: 0"
+text = "0"
 script = ExtResource("6_35e46")
 
 [node name="TimerLabel" type="Label" parent="UserInterface"]
@@ -103,7 +144,6 @@ offset_right = 1119.0
 offset_bottom = 129.0
 theme = SubResource("Theme_q12iw")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-script = ExtResource("6_35e46")
 
 [node name="Win" type="ColorRect" parent="UserInterface"]
 layout_mode = 1
@@ -154,6 +194,1325 @@ grow_vertical = 2
 text = "Изгубивте! Притиснете Enter за да играте повторно."
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="ParkElements" type="Node" parent="."]
+
+[node name="Trees" type="Node" parent="ParkElements"]
+
+[node name="Tree" parent="ParkElements/Trees" instance=ExtResource("11_2cgoo")]
+transform = Transform3D(2.59808, 0, -1.5, 0, 3, 0, 1.5, 0, 2.59808, 117, 0, 21)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Tree6" parent="ParkElements/Trees" instance=ExtResource("11_2cgoo")]
+transform = Transform3D(2.12132, 0, -2.12132, 0, 3, 0, 2.12132, 0, 2.12132, 33, 0, -35)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Tree2" parent="ParkElements/Trees" instance=ExtResource("11_s84n1")]
+transform = Transform3D(2.59808, 0, 1.5, 0, 3, 0, -1.5, 0, 2.59808, 0, -1, 103)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Tree15" parent="ParkElements/Trees" instance=ExtResource("11_s84n1")]
+transform = Transform3D(2.12132, 0, 2.12132, 0, 3, 0, -2.12132, 0, 2.12132, -86, -1, -102)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Tree16" parent="ParkElements/Trees" instance=ExtResource("11_s84n1")]
+transform = Transform3D(2.59808, 0, -1.5, 0, 3, 0, 1.5, 0, 2.59808, -120, -1, 78)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Tree7" parent="ParkElements/Trees" instance=ExtResource("11_s84n1")]
+transform = Transform3D(2.59808, 0, -1.5, 0, 3, 0, 1.5, 0, 2.59808, 54, -1, 39)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Tree8" parent="ParkElements/Trees" instance=ExtResource("11_s84n1")]
+transform = Transform3D(2.59808, 0, 1.5, 0, 3, 0, -1.5, 0, 2.59808, 115, -1, -101)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Tree18" parent="ParkElements/Trees" instance=ExtResource("11_s84n1")]
+transform = Transform3D(2.12132, 0, -2.12132, 0, 3, 0, 2.12132, 0, 2.12132, -127, -1, -52)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Tree3" parent="ParkElements/Trees" instance=ExtResource("12_8vnbs")]
+transform = Transform3D(2.89778, 0, 0.776457, 0, 3, 0, -0.776457, 0, 2.89778, -102, 0, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Tree9" parent="ParkElements/Trees" instance=ExtResource("12_8vnbs")]
+transform = Transform3D(2.12132, 0, -2.12132, 0, 3, 0, 2.12132, 0, 2.12132, 48, 0, 117)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Tree10" parent="ParkElements/Trees" instance=ExtResource("12_8vnbs")]
+transform = Transform3D(2.59808, 0, 1.5, 0, 3, 0, -1.5, 0, 2.59808, 92, 0, -28)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Tree17" parent="ParkElements/Trees" instance=ExtResource("12_8vnbs")]
+transform = Transform3D(2.89778, 0, 0.776457, 0, 3, 0, -0.776457, 0, 2.89778, -36, 0, 42)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Tree11" parent="ParkElements/Trees" instance=ExtResource("12_8vnbs")]
+transform = Transform3D(1.5, 0, -2.59808, 0, 3, 0, 2.59808, 0, 1.5, 62, 0, -109)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Tree4" parent="ParkElements/Trees" instance=ExtResource("13_wt7l6")]
+transform = Transform3D(2.89778, 0, -0.776457, 0, 3, 0, 0.776457, 0, 2.89778, -8, 0, -115)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Tree12" parent="ParkElements/Trees" instance=ExtResource("13_wt7l6")]
+transform = Transform3D(2.12132, 0, 2.12132, 0, 3, 0, -2.12132, 0, 2.12132, 117, 0, 97)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Tree13" parent="ParkElements/Trees" instance=ExtResource("13_wt7l6")]
+transform = Transform3D(2.59808, 0, -1.5, 0, 3, 0, 1.5, 0, 2.59808, -64, 0, 119)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Tree14" parent="ParkElements/Trees" instance=ExtResource("13_wt7l6")]
+transform = Transform3D(2.59808, 0, -1.5, 0, 3, 0, 1.5, 0, 2.59808, -46, 0, -44)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Benches" type="Node" parent="ParkElements"]
+
+[node name="Bench" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(-1.19209e-07, 0, 2, 0, 2, 0, -2, 0, -1.19209e-07, 67, 0, 43)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Bench2" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(-1.93185, 0, -0.517638, 0, 2, 0, 0.517638, 0, -1.93185, 9, 0, 90)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Bench3" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(-1.73205, 0, -1, 0, 2, 0, 1, 0, -1.73205, 55, 0, 100)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Bench4" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(-1.73205, 0, -1, 0, 2, 0, 1, 0, -1.73205, 125, 0, 79)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Bench5" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(-0.517638, 0, -1.93185, 0, 2, 0, 1.93185, 0, -0.517638, 119, 0, 7)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Bench6" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(-1, 0, -1.73205, 0, 2, 0, 1.73205, 0, -1, 105, 0, -45)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Bench10" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(1.41421, 0, 1.41421, 0, 2, 0, -1.41421, 0, 1.41421, -12, 0, -99)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Bench7" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(-1.73205, 0, -1, 0, 2, 0, 1, 0, -1.73205, 111, 0, -112)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Bench8" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(1.41421, 0, 1.41421, 0, 2, 0, -1.41421, 0, 1.41421, 67, 0, -96)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Bench9" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 37, 0, -42)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Bench11" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(1, 0, 1.73205, 0, 2, 0, -1.73205, 0, 1, -35, 0, -36)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Bench12" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(1.73205, 0, 1, 0, 2, 0, -1, 0, 1.73205, -118, 0, -44)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Bench14" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -83, 0, -89)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Bench15" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(1.73205, 0, 1, 0, 2, 0, -1, 0, 1.73205, -10, 0, -100)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Bench16" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -39, 0, 52)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Bench17" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(-1.41421, 0, 1.41421, 0, 2, 0, -1.41421, 0, -1.41421, -102, 0, 80)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Bench18" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(-1.93185, 0, 0.517638, 0, 2, 0, -0.517638, 0, -1.93185, -56, 0, 106)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Bench13" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
+transform = Transform3D(1.73205, 0, 1, 0, 2, 0, -1, 0, 1.73205, -96, 0, 12)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flowers" type="Node" parent="ParkElements"]
+
+[node name="FlowerElement" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 14)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement6" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77, 0, -10)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement6" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement6" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement6" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement7" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 0, 9)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement7" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement7" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement7" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement8" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -110, 0, 43)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement8" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement8" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement8" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement9" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -124, 0, -52)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement9" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement9" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement9" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement10" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, -66)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement10" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement10" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement10" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement11" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 74, 0, 96)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement11" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement11" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement11" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement14" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -112, 0, 83)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement14" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement14" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement14" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement15" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 136, 0, 83)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement15" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement15" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement15" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement16" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 136, 0, 27)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement16" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement16" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement16" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement12" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41, 0, 96)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement12" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement12" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement12" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement13" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 96)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement13" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement13" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement13" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement2" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -35)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement2" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement2" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement2" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement3" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49, 0, -5)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement3" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement3" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement3" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement17" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 94, 0, -30)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement17" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement17" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement17" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement18" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 116, 0, -99)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement18" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement18" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement18" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement19" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59, 0, -93)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement19" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement19" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement19" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement20" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -106)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement20" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement20" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement20" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement21" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59, 0, -106)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement21" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement21" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement21" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement22" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69, 0, -74)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement22" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement22" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement22" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement24" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -110, 0, -86)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement24" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement24" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement24" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement25" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -133, 0, -41)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement25" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement25" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement25" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement26" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -133, 0, -125)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement26" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement26" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement26" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement27" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59, 0, -152)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement27" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement27" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement27" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement28" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59, 0, -152)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement28" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement28" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement28" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement23" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -108, 0, -27)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement23" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement23" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement23" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement4" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63, 0, 48)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement4" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement4" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement4" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="FlowerElement5" type="Node3D" parent="ParkElements/Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63, 0, 48)
+
+[node name="Plant" parent="ParkElements/Flowers/FlowerElement5" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower" parent="ParkElements/Flowers/FlowerElement5" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Flower2" parent="ParkElements/Flowers/FlowerElement5" instance=ExtResource("15_37vau")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plants" type="Node" parent="ParkElements"]
+
+[node name="PlantElement" type="Node3D" parent="ParkElements/Plants"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 41)
+
+[node name="Plant" parent="ParkElements/Plants/PlantElement" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant2" parent="ParkElements/Plants/PlantElement" instance=ExtResource("19_qmplu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant3" parent="ParkElements/Plants/PlantElement" instance=ExtResource("19_qmplu")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="PlantElement4" type="Node3D" parent="ParkElements/Plants"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -16, 0, -67)
+
+[node name="Plant" parent="ParkElements/Plants/PlantElement4" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant2" parent="ParkElements/Plants/PlantElement4" instance=ExtResource("19_qmplu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant3" parent="ParkElements/Plants/PlantElement4" instance=ExtResource("19_qmplu")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="PlantElement5" type="Node3D" parent="ParkElements/Plants"]
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, -129, 0, -99)
+
+[node name="Plant" parent="ParkElements/Plants/PlantElement5" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant2" parent="ParkElements/Plants/PlantElement5" instance=ExtResource("19_qmplu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant3" parent="ParkElements/Plants/PlantElement5" instance=ExtResource("19_qmplu")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="PlantElement6" type="Node3D" parent="ParkElements/Plants"]
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, -36, 0, -99)
+
+[node name="Plant" parent="ParkElements/Plants/PlantElement6" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant2" parent="ParkElements/Plants/PlantElement6" instance=ExtResource("19_qmplu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant3" parent="ParkElements/Plants/PlantElement6" instance=ExtResource("19_qmplu")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="PlantElement7" type="Node3D" parent="ParkElements/Plants"]
+transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 44, 0, -87)
+
+[node name="Plant" parent="ParkElements/Plants/PlantElement7" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant2" parent="ParkElements/Plants/PlantElement7" instance=ExtResource("19_qmplu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant3" parent="ParkElements/Plants/PlantElement7" instance=ExtResource("19_qmplu")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="PlantElement8" type="Node3D" parent="ParkElements/Plants"]
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 64, 0, -56)
+
+[node name="Plant" parent="ParkElements/Plants/PlantElement8" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant2" parent="ParkElements/Plants/PlantElement8" instance=ExtResource("19_qmplu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant3" parent="ParkElements/Plants/PlantElement8" instance=ExtResource("19_qmplu")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="PlantElement9" type="Node3D" parent="ParkElements/Plants"]
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 131, 0, -56)
+
+[node name="Plant" parent="ParkElements/Plants/PlantElement9" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant2" parent="ParkElements/Plants/PlantElement9" instance=ExtResource("19_qmplu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant3" parent="ParkElements/Plants/PlantElement9" instance=ExtResource("19_qmplu")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="PlantElement10" type="Node3D" parent="ParkElements/Plants"]
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 131, 0, -152)
+
+[node name="Plant" parent="ParkElements/Plants/PlantElement10" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant2" parent="ParkElements/Plants/PlantElement10" instance=ExtResource("19_qmplu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant3" parent="ParkElements/Plants/PlantElement10" instance=ExtResource("19_qmplu")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="PlantElement11" type="Node3D" parent="ParkElements/Plants"]
+transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, 71, 0, -152)
+
+[node name="Plant" parent="ParkElements/Plants/PlantElement11" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant2" parent="ParkElements/Plants/PlantElement11" instance=ExtResource("19_qmplu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant3" parent="ParkElements/Plants/PlantElement11" instance=ExtResource("19_qmplu")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="PlantElement2" type="Node3D" parent="ParkElements/Plants"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -76, 0, 4)
+
+[node name="Plant" parent="ParkElements/Plants/PlantElement2" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant2" parent="ParkElements/Plants/PlantElement2" instance=ExtResource("19_qmplu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant3" parent="ParkElements/Plants/PlantElement2" instance=ExtResource("19_qmplu")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="PlantElement12" type="Node3D" parent="ParkElements/Plants"]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, -76, 0, 62)
+
+[node name="Plant" parent="ParkElements/Plants/PlantElement12" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant2" parent="ParkElements/Plants/PlantElement12" instance=ExtResource("19_qmplu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant3" parent="ParkElements/Plants/PlantElement12" instance=ExtResource("19_qmplu")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="PlantElement13" type="Node3D" parent="ParkElements/Plants"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -138, 0, 29)
+
+[node name="Plant" parent="ParkElements/Plants/PlantElement13" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant2" parent="ParkElements/Plants/PlantElement13" instance=ExtResource("19_qmplu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant3" parent="ParkElements/Plants/PlantElement13" instance=ExtResource("19_qmplu")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="PlantElement14" type="Node3D" parent="ParkElements/Plants"]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -138, 0, 123)
+
+[node name="Plant" parent="ParkElements/Plants/PlantElement14" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant2" parent="ParkElements/Plants/PlantElement14" instance=ExtResource("19_qmplu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant3" parent="ParkElements/Plants/PlantElement14" instance=ExtResource("19_qmplu")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="PlantElement15" type="Node3D" parent="ParkElements/Plants"]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -18, 0, 145)
+
+[node name="Plant" parent="ParkElements/Plants/PlantElement15" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant2" parent="ParkElements/Plants/PlantElement15" instance=ExtResource("19_qmplu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant3" parent="ParkElements/Plants/PlantElement15" instance=ExtResource("19_qmplu")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="PlantElement16" type="Node3D" parent="ParkElements/Plants"]
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 96, 0, 145)
+
+[node name="Plant" parent="ParkElements/Plants/PlantElement16" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant2" parent="ParkElements/Plants/PlantElement16" instance=ExtResource("19_qmplu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant3" parent="ParkElements/Plants/PlantElement16" instance=ExtResource("19_qmplu")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="PlantElement17" type="Node3D" parent="ParkElements/Plants"]
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 96, 0, 74)
+
+[node name="Plant" parent="ParkElements/Plants/PlantElement17" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant2" parent="ParkElements/Plants/PlantElement17" instance=ExtResource("19_qmplu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant3" parent="ParkElements/Plants/PlantElement17" instance=ExtResource("19_qmplu")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="PlantElement3" type="Node3D" parent="ParkElements/Plants"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -101, 0, -52)
+
+[node name="Plant" parent="ParkElements/Plants/PlantElement3" instance=ExtResource("19_qmplu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant2" parent="ParkElements/Plants/PlantElement3" instance=ExtResource("19_qmplu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Plant3" parent="ParkElements/Plants/PlantElement3" instance=ExtResource("19_qmplu")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rocks" type="Node" parent="ParkElements"]
+
+[node name="RockElement" type="Node3D" parent="ParkElements/Rocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -87, 0, 0)
+
+[node name="Rock" parent="ParkElements/Rocks/RockElement" instance=ExtResource("16_al4ye")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 9, 0, -3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock2" parent="ParkElements/Rocks/RockElement" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 10, 0, -10)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock4" parent="ParkElements/Rocks/RockElement" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, -9)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock3" parent="ParkElements/Rocks/RockElement" instance=ExtResource("18_jb3al")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7, 0, -7)
+collision_layer = 4
+collision_mask = 0
+
+[node name="RockElement2" type="Node3D" parent="ParkElements/Rocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 97, 0, 0)
+
+[node name="Rock" parent="ParkElements/Rocks/RockElement2" instance=ExtResource("16_al4ye")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 9, 0, -3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock2" parent="ParkElements/Rocks/RockElement2" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 10, 0, -10)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock4" parent="ParkElements/Rocks/RockElement2" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, -9)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock3" parent="ParkElements/Rocks/RockElement2" instance=ExtResource("18_jb3al")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7, 0, -7)
+collision_layer = 4
+collision_mask = 0
+
+[node name="RockElement3" type="Node3D" parent="ParkElements/Rocks"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 134, 0, 47)
+
+[node name="Rock" parent="ParkElements/Rocks/RockElement3" instance=ExtResource("16_al4ye")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 9, 0, -3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock2" parent="ParkElements/Rocks/RockElement3" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 10, 0, -10)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock4" parent="ParkElements/Rocks/RockElement3" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, -9)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock3" parent="ParkElements/Rocks/RockElement3" instance=ExtResource("18_jb3al")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7, 0, -7)
+collision_layer = 4
+collision_mask = 0
+
+[node name="RockElement4" type="Node3D" parent="ParkElements/Rocks"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 70, 0, 89)
+
+[node name="Rock" parent="ParkElements/Rocks/RockElement4" instance=ExtResource("16_al4ye")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 9, 0, -3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock2" parent="ParkElements/Rocks/RockElement4" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 10, 0, -10)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock4" parent="ParkElements/Rocks/RockElement4" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, -9)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock3" parent="ParkElements/Rocks/RockElement4" instance=ExtResource("18_jb3al")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7, 0, -7)
+collision_layer = 4
+collision_mask = 0
+
+[node name="RockElement5" type="Node3D" parent="ParkElements/Rocks"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 19, 0, 89)
+
+[node name="Rock" parent="ParkElements/Rocks/RockElement5" instance=ExtResource("16_al4ye")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 9, 0, -3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock2" parent="ParkElements/Rocks/RockElement5" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 10, 0, -10)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock4" parent="ParkElements/Rocks/RockElement5" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, -9)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock3" parent="ParkElements/Rocks/RockElement5" instance=ExtResource("18_jb3al")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7, 0, -7)
+collision_layer = 4
+collision_mask = 0
+
+[node name="RockElement6" type="Node3D" parent="ParkElements/Rocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41, 0, 102)
+
+[node name="Rock" parent="ParkElements/Rocks/RockElement6" instance=ExtResource("16_al4ye")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 9, 0, -3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock2" parent="ParkElements/Rocks/RockElement6" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 10, 0, -10)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock4" parent="ParkElements/Rocks/RockElement6" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, -9)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock3" parent="ParkElements/Rocks/RockElement6" instance=ExtResource("18_jb3al")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7, 0, -7)
+collision_layer = 4
+collision_mask = 0
+
+[node name="RockElement7" type="Node3D" parent="ParkElements/Rocks"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -111, 0, 102)
+
+[node name="Rock" parent="ParkElements/Rocks/RockElement7" instance=ExtResource("16_al4ye")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 9, 0, -3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock2" parent="ParkElements/Rocks/RockElement7" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 10, 0, -10)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock4" parent="ParkElements/Rocks/RockElement7" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, -9)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock3" parent="ParkElements/Rocks/RockElement7" instance=ExtResource("18_jb3al")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7, 0, -7)
+collision_layer = 4
+collision_mask = 0
+
+[node name="RockElement8" type="Node3D" parent="ParkElements/Rocks"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -119, 0, -67)
+
+[node name="Rock" parent="ParkElements/Rocks/RockElement8" instance=ExtResource("16_al4ye")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 9, 0, -3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock2" parent="ParkElements/Rocks/RockElement8" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 10, 0, -10)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock4" parent="ParkElements/Rocks/RockElement8" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, -9)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock3" parent="ParkElements/Rocks/RockElement8" instance=ExtResource("18_jb3al")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7, 0, -7)
+collision_layer = 4
+collision_mask = 0
+
+[node name="RockElement9" type="Node3D" parent="ParkElements/Rocks"]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, -119, 0, -121)
+
+[node name="Rock" parent="ParkElements/Rocks/RockElement9" instance=ExtResource("16_al4ye")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 9, 0, -3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock2" parent="ParkElements/Rocks/RockElement9" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 10, 0, -10)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock4" parent="ParkElements/Rocks/RockElement9" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, -9)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock3" parent="ParkElements/Rocks/RockElement9" instance=ExtResource("18_jb3al")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7, 0, -7)
+collision_layer = 4
+collision_mask = 0
+
+[node name="RockElement10" type="Node3D" parent="ParkElements/Rocks"]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 25, 0, -121)
+
+[node name="Rock" parent="ParkElements/Rocks/RockElement10" instance=ExtResource("16_al4ye")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 9, 0, -3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock2" parent="ParkElements/Rocks/RockElement10" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 10, 0, -10)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock4" parent="ParkElements/Rocks/RockElement10" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, -9)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock3" parent="ParkElements/Rocks/RockElement10" instance=ExtResource("18_jb3al")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7, 0, -7)
+collision_layer = 4
+collision_mask = 0
+
+[node name="RockElement11" type="Node3D" parent="ParkElements/Rocks"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -38, 0, -121)
+
+[node name="Rock" parent="ParkElements/Rocks/RockElement11" instance=ExtResource("16_al4ye")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 9, 0, -3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock2" parent="ParkElements/Rocks/RockElement11" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 10, 0, -10)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock4" parent="ParkElements/Rocks/RockElement11" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, -9)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock3" parent="ParkElements/Rocks/RockElement11" instance=ExtResource("18_jb3al")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7, 0, -7)
+collision_layer = 4
+collision_mask = 0
+
+[node name="RockElement12" type="Node3D" parent="ParkElements/Rocks"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 131, 0, -121)
+
+[node name="Rock" parent="ParkElements/Rocks/RockElement12" instance=ExtResource("16_al4ye")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 9, 0, -3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock2" parent="ParkElements/Rocks/RockElement12" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 10, 0, -10)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock4" parent="ParkElements/Rocks/RockElement12" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, -9)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock3" parent="ParkElements/Rocks/RockElement12" instance=ExtResource("18_jb3al")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7, 0, -7)
+collision_layer = 4
+collision_mask = 0
+
+[node name="RockElement13" type="Node3D" parent="ParkElements/Rocks"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 131, 0, -76)
+
+[node name="Rock" parent="ParkElements/Rocks/RockElement13" instance=ExtResource("16_al4ye")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 9, 0, -3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock2" parent="ParkElements/Rocks/RockElement13" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 10, 0, -10)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock4" parent="ParkElements/Rocks/RockElement13" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, -9)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock3" parent="ParkElements/Rocks/RockElement13" instance=ExtResource("18_jb3al")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7, 0, -7)
+collision_layer = 4
+collision_mask = 0
+
+[node name="RockElement14" type="Node3D" parent="ParkElements/Rocks"]
+transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, 83, 0, -76)
+
+[node name="Rock" parent="ParkElements/Rocks/RockElement14" instance=ExtResource("16_al4ye")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 9, 0, -3)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock2" parent="ParkElements/Rocks/RockElement14" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 10, 0, -10)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock4" parent="ParkElements/Rocks/RockElement14" instance=ExtResource("17_eg38s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, -9)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Rock3" parent="ParkElements/Rocks/RockElement14" instance=ExtResource("18_jb3al")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7, 0, -7)
+collision_layer = 4
+collision_mask = 0
 
 [connection signal="collected" from="Treasure" to="." method="_on_treasure_collected"]
 [connection signal="collected" from="Treasure" to="UserInterface/ScoreLabel" method="_on_treasure_collected"]

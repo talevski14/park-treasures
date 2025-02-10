@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://di4d6ptxyhvmb"]
+
+[ext_resource type="PackedScene" uid="uid://dw81rt83yg4wx" path="res://art/environment/Plant.fbx" id="1_5a3xh"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_05em2"]
+height = 1.02686
+radius = 1.25205
+
+[node name="Plant" type="StaticBody3D"]
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Plant" parent="Pivot" instance=ExtResource("1_5a3xh")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.531446, 0)
+shape = SubResource("CylinderShape3D_05em2")

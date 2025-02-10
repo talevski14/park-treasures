@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://i2di4n1e3src"]
+
+[ext_resource type="PackedScene" uid="uid://p3ftm0l4i1n" path="res://art/environment/Rose.fbx" id="1_ycvfn"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_05em2"]
+height = 1.20701
+radius = 0.666559
+
+[node name="Flower" type="StaticBody3D"]
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Rose" parent="Pivot" instance=ExtResource("1_ycvfn")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.621522, 0)
+shape = SubResource("CylinderShape3D_05em2")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://djsn7eekex8ni"]
+
+[ext_resource type="PackedScene" uid="uid://fvkvam028cx7" path="res://art/environment/WizardTree.fbx" id="1_65l07"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lfm16"]
+size = Vector3(1.91431, 8.31567, 2.83838)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ixq5a"]
+radius = 6.18065
+
+[node name="Tree" type="StaticBody3D"]
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="WizardTree" parent="Pivot" instance=ExtResource("1_65l07")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00939941, 4.17468, -0.198363)
+shape = SubResource("BoxShape3D_lfm16")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.89461, 0)
+shape = SubResource("SphereShape3D_ixq5a")

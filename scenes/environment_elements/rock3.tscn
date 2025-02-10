@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://jet8d67ymx8h"]
+
+[ext_resource type="PackedScene" uid="uid://ddal20xw7vjq6" path="res://art/environment/Rock_06.fbx" id="1_55eed"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_05em2"]
+height = 1.62136
+radius = 1.96365
+
+[node name="Rock" type="StaticBody3D"]
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.828695, 0)
+
+[node name="Rock_06" parent="Pivot" instance=ExtResource("1_55eed")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.828696, 0)
+shape = SubResource("CylinderShape3D_05em2")

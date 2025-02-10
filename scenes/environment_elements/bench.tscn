@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqqgh3cdophgx"]
+
+[ext_resource type="PackedScene" uid="uid://c80d8axpdledu" path="res://art/environment/Parkbank.fbx" id="1_jhumv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_52kfp"]
+size = Vector3(7.21948, 2.71119, 2.80262)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_61i5o"]
+size = Vector3(7.03723, 2.68073, 0.944458)
+
+[node name="Bench" type="StaticBody3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="Parkbank" parent="Node3D" instance=ExtResource("1_jhumv")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.269409, 1.43071, 2.44486)
+shape = SubResource("BoxShape3D_52kfp")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.238831, 4.12656, 1.02826)
+shape = SubResource("BoxShape3D_61i5o")

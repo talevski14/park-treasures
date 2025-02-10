@@ -11,7 +11,7 @@ extends Node
 
 var current_score = 0
 var score_to_win = 10
-var time_left = 10
+var time_left = 100
 
 var treasure_array = []
 
@@ -51,15 +51,22 @@ func _on_timer_timeout():
 		if time_left == 0:
 			game_over()
 
+func format_time(seconds: int) -> String:
+	var minutes = seconds / 60
+	var secs = seconds % 60
+	return "%d:%02d" % [minutes, secs] 
+
 func update_ui():
-	timer_label.text = str(time_left) + "s"
+	timer_label.text = str(format_time(time_left))
 
 func game_over():
 	timer.stop()
+	$Player.set_physics_process(false)
 	$UserInterface/Lose.show()
-	
+
 func winner():
 	timer.stop()
+	$Player.set_physics_process(false)
 	$UserInterface/Win.show()
 	
 func _unhandled_input(event: InputEvent) -> void:
