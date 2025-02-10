@@ -12,9 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://c8y1bkmnvqopw" path="res://scenes/treasure5.tscn" id="6_vywc3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ufbyf"]
-size = Vector3(60, 2, 60)
+size = Vector3(100, 2, 100)
 
-[sub_resource type="BoxMesh" id="BoxMesh_w0rou"]
+[sub_resource type="BoxMesh" id="BoxMesh_xuva8"]
 size = Vector3(100, 2, 100)
 
 [sub_resource type="Curve3D" id="Curve3D_fnw5v"]
@@ -44,7 +44,7 @@ collision_mask = 0
 shape = SubResource("BoxShape3D_ufbyf")
 
 [node name="Plane" type="MeshInstance3D" parent="Ground/CollisionShape3D"]
-mesh = SubResource("BoxMesh_w0rou")
+mesh = SubResource("BoxMesh_xuva8")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 15, 20)
@@ -78,9 +78,11 @@ transform = Transform3D(0.00505381, 0, -0.999987, 0, 1, 0, 0.999987, 0, 0.005053
 
 [node name="UserInterface" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ScoreLabel" type="Label" parent="UserInterface"]
 layout_mode = 0
@@ -102,6 +104,54 @@ offset_bottom = 129.0
 theme = SubResource("Theme_q12iw")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 script = ExtResource("6_35e46")
+
+[node name="Win" type="ColorRect" parent="UserInterface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.384314)
+
+[node name="Label" type="Label" parent="UserInterface/Win"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = -11.5
+offset_right = 215.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Победивте! Притиснете Enter за да играте повторно."
+
+[node name="Lose" type="ColorRect" parent="UserInterface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.384314)
+
+[node name="Label" type="Label" parent="UserInterface/Lose"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = -11.5
+offset_right = 215.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Изгубивте! Притиснете Enter за да играте повторно."
 
 [node name="Timer" type="Timer" parent="."]
 

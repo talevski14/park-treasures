@@ -8,11 +8,17 @@ extends Node
 
 @onready var timer = $Timer
 @onready var timer_label = $UserInterface/TimerLabel
-var time_left = 30
+
+var current_score = 0
+var score_to_win = 10
+var time_left = 10
 
 var treasure_array = []
 
 func _ready() -> void:
+	$UserInterface/Win.hide()
+	$UserInterface/Lose.hide()
+	
 	randomize()
 	treasure_array = [treasure_scene_1, treasure_scene_2, treasure_scene_3, treasure_scene_4, treasure_scene_5]
 	
@@ -22,6 +28,10 @@ func _ready() -> void:
 	update_ui()
 
 func _on_treasure_collected() -> void:
+	current_score += 1
+	if current_score >= score_to_win:
+		winner()
+		
 	var treasure_scene = treasure_array[randi() % treasure_array.size()]
 	var treasure = treasure_scene.instantiate()
 	var treasure_spawn_location = get_node("SpawnPath/SpawnLocation")
@@ -46,4 +56,12 @@ func update_ui():
 
 func game_over():
 	timer.stop()
-	print("Game Over!")
+	$UserInterface/Lose.show()
+	
+func winner():
+	timer.stop()
+	$UserInterface/Win.show()
+	
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept") and ($UserInterface/Win.visible or $UserInterface/Lose.visible):
+		get_tree().reload_current_scene()
