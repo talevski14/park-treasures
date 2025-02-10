@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dnc18kgr4umpk"]
+[gd_scene load_steps=30 format=3 uid="uid://dnc18kgr4umpk"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_37plf"]
 [ext_resource type="PackedScene" uid="uid://depmb8nkigylh" path="res://scenes/player.tscn" id="1_a3mwd"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dh0ijdxhyept2" path="res://scenes/treasure4.tscn" id="5_spet3"]
 [ext_resource type="Script" path="res://scripts/score_label.gd" id="6_35e46"]
 [ext_resource type="PackedScene" uid="uid://c8y1bkmnvqopw" path="res://scenes/treasure5.tscn" id="6_vywc3"]
+[ext_resource type="Material" uid="uid://deqypci78mvrl" path="res://art/grass.tres" id="7_sly72"]
 [ext_resource type="PackedScene" uid="uid://ctpnvf4bo753u" path="res://scenes/environment_elements/tree1.tscn" id="11_2cgoo"]
 [ext_resource type="PackedScene" uid="uid://b712dxlrxdl2o" path="res://scenes/environment_elements/tree2.tscn" id="11_s84n1"]
 [ext_resource type="PackedScene" uid="uid://djacnwvr2bpa2" path="res://scenes/environment_elements/tree3.tscn" id="12_8vnbs"]
@@ -20,6 +21,31 @@
 [ext_resource type="PackedScene" uid="uid://jet8d67ymx8h" path="res://scenes/environment_elements/rock3.tscn" id="18_jb3al"]
 [ext_resource type="PackedScene" uid="uid://di4d6ptxyhvmb" path="res://scenes/environment_elements/plant.tscn" id="19_qmplu"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ccmmy"]
+sky_top_color = Color(0.302927, 0.467276, 0.599945, 1)
+sky_horizon_color = Color(0.625732, 0.659069, 0.683236, 1)
+ground_horizon_color = Color(0.625732, 0.659069, 0.683236, 1)
+
+[sub_resource type="Sky" id="Sky_j8gs8"]
+sky_material = SubResource("ProceduralSkyMaterial_ccmmy")
+
+[sub_resource type="Environment" id="Environment_rbeaa"]
+background_mode = 2
+sky = SubResource("Sky_j8gs8")
+sky_custom_fov = 130.8
+ambient_light_source = 3
+ambient_light_color = Color(0.586223, 0.789756, 0.81743, 1)
+reflected_light_source = 2
+tonemap_mode = 2
+fog_mode = 1
+fog_light_energy = 1.17
+fog_sun_scatter = 0.59
+fog_density = 0.0414
+fog_aerial_perspective = 0.842
+fog_sky_affect = 0.38
+fog_height = 21.56
+fog_depth_curve = 0.450625
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_ufbyf"]
 size = Vector3(300, 2, 300)
 
@@ -27,28 +53,18 @@ size = Vector3(300, 2, 300)
 size = Vector3(8, 65, 310)
 
 [sub_resource type="BoxMesh" id="BoxMesh_xuva8"]
-size = Vector3(300, 2, 300)
+size = Vector3(350, 2, 350)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_n2n58"]
-noise_type = 0
-seed = 14
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hyocw"]
-as_normal_map = true
-noise = SubResource("FastNoiseLite_n2n58")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xvsv4"]
-albedo_color = Color(0.216619, 0.383158, 0.143435, 1)
-metallic_specular = 0.0
-roughness_texture = SubResource("NoiseTexture2D_hyocw")
-roughness_texture_channel = 1
+[sub_resource type="SphereMesh" id="SphereMesh_hjwn2"]
+radius = 16.341
+height = 72.286
 
 [sub_resource type="Curve3D" id="Curve3D_fnw5v"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -32.0078, 9, -33.9532, 0, 0, 0, 0, 0, 0, 34.8524, 9, -34.2911, 0, 0, 0, 0, 0, 0, 37.3872, 9, 36.9627, 0, 0, 0, 0, 0, 0, -37.1351, 9, 35.4418, 0, 0, 0, 0, 0, 0, -37.304, 9, -27.2515, 0, 0, 0, 0, 0, 0, 24.0374, 9, -28.0964, 0, 0, 0, 0, 0, 0, 26.0652, 9, 25.3027, 0, 0, 0, 0, 0, 0, -25.3061, 9, 25.6407, 0, 0, 0, 0, 0, 0, -26.1511, 9, -16.2675, 0, 0, 0, 0, 0, 0, 15.2502, 9, -16.6055, 0, 0, 0, 0, 0, 0, 17.447, 9, 16.5155, 0, 0, 0, 0, 0, 0, -32.0078, 9, -33.9532),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 9.0693, 9, -69.1617, 0, 0, 0, 0, 0, 0, -20.9058, 9, -75.3209, 0, 0, 0, 0, 0, 0, -66.4844, 9, -72.036, 0, 0, 0, 0, 0, 0, -91.532, 9, -58.075, 0, 0, 0, 0, 0, 0, -74.2861, 9, -17.8344, 0, 0, 0, 0, 0, 0, -61.1463, 9, -0.588503, 0, 0, 0, 0, 0, 0, -84.5515, 9, 42.937, 0, 0, 0, 0, 0, 0, -80.4454, 9, 65.9316, 0, 0, 0, 0, 0, 0, -51.7021, 9, 79.0713, 0, 0, 0, 0, 0, 0, -22.9589, 9, 78.6607, 0, 0, 0, 0, 0, 0, 25.494, 9, 66.7528, 0, 0, 0, 0, 0, 0, 51.3629, 9, 80.3032, 0, 0, 0, 0, 0, 0, 76.8212, 9, 101.655, 0, 0, 0, 0, 0, 0, 96.9415, 9, 74.9652, 0, 0, 0, 0, 0, 0, 108.439, 9, 52.3812, 0, 0, 0, 0, 0, 0, 87.4973, 9, 30.6184, 0, 0, 0, 0, 0, 0, 75.1787, 9, 10.9088, 0, 0, 0, 0, 0, 0, 61.6284, 9, -16.6026, 0, 0, 0, 0, 0, 0, 59.1647, 9, -56.0219, 0, 0, 0, 0, 0, 0, 43.5612, 9, -78.1953, 0, 0, 0, 0, 0, 0, 19.3347, 9, -62.1812, 0, 0, 0, 0, 0, 0, 9.0693, 9, -69.1617),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 12
+point_count = 22
 
 [sub_resource type="Theme" id="Theme_q12iw"]
 default_font_size = 50
@@ -60,6 +76,9 @@ treasure_scene_2 = ExtResource("3_pbxxw")
 treasure_scene_3 = ExtResource("4_x6v1r")
 treasure_scene_4 = ExtResource("5_spet3")
 treasure_scene_5 = ExtResource("6_vywc3")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rbeaa")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -78,17 +97,1299 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -149.5, 31, -0.5)
 shape = SubResource("BoxShape3D_gis1g")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="Ground"]
-transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 0.5, 31, -152.5)
+transform = Transform3D(-0.00195474, 8.54456e-11, 0.999998, 8.33703e-14, 1, -8.54456e-11, -0.999998, -8.33729e-14, -0.00195474, 0.488788, 31, -151.469)
 shape = SubResource("BoxShape3D_gis1g")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="Ground"]
-transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 0.5, 31, 149.5)
+transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 0.5, 31, 181.5)
 shape = SubResource("BoxShape3D_gis1g")
 
 [node name="Plane" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("BoxMesh_xuva8")
 skeleton = NodePath("../CollisionShape3D")
-surface_material_override/0 = SubResource("StandardMaterial3D_xvsv4")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 178, -26, 0)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 178, -25, 19)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 178, -20, -21)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 178, -26, -66)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 178, -25, -47)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 178, -20, -87)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 178, -26, -128)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 178, -25, -109)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 151, -20, -173)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D66" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 172, -20, -173)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D67" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 182, -20, -136)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 178, -26, 65)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 178, -25, 84)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 178, -20, 44)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 178, -26, 130)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 174, -25, -156)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 178, -20, 109)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185, -26, 0)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185, -25, 19)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185, -20, -21)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185, -26, -66)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D20" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185, -25, -47)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D21" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185, -20, -87)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D22" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185, -26, -128)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D23" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185, -25, -109)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D24" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -156, -20, -173)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D65" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -176, -20, -153)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D25" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185, -26, 65)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D26" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185, -25, 84)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D27" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185, -20, 44)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D28" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185, -26, 130)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D29" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185, -25, 149)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D30" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185, -20, 109)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D31" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 0.530005, -26, -172.436)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D32" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -18.47, -25, -172.399)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D33" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 21.53, -20, -172.477)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D34" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 66.5299, -26, -172.565)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D35" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 44.5299, -25, -172.522)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D36" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 87.5298, -20, -172.606)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D37" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 128.53, -26, -172.686)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D38" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 109.53, -25, -172.649)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D39" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 149.53, -20, -172.727)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D40" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -64.4699, -26, -172.309)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D41" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -83.4698, -25, -172.272)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D42" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -43.4699, -20, -172.35)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D43" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -129.47, -26, -172.182)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D44" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -148.47, -25, -172.145)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D45" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -108.47, -20, -172.223)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D68" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 183, -20, -217)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D69" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 204, -20, -217)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D70" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -124, -20, -217)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D71" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 32.53, -26, -216.436)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D72" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 13.53, -25, -216.399)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D73" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 53.53, -20, -216.477)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D74" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 98.5299, -26, -216.565)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D75" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 76.5299, -25, -216.522)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D76" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 119.53, -20, -216.606)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D77" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 160.53, -26, -216.686)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D78" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 141.53, -25, -216.649)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D79" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 181.53, -20, -216.727)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D80" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -32.4699, -26, -216.309)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D81" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -51.4698, -25, -216.272)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D82" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -11.4699, -20, -216.35)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D83" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -97.4697, -26, -216.182)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D84" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -116.47, -25, -216.145)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D85" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -76.4698, -20, -216.223)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D86" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 183, -20, 228)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D87" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 204, -20, 228)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D88" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -124, -20, 228)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D89" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 32.53, -26, 228.564)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D90" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 13.53, -25, 228.601)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D91" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 53.53, -20, 228.523)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D92" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 98.5299, -26, 228.435)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D93" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 76.5299, -25, 228.478)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D94" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 119.53, -20, 228.394)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D95" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 160.53, -26, 228.314)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D96" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 141.53, -25, 228.351)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D97" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 181.53, -20, 228.273)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D98" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -32.4699, -26, 228.691)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D99" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -51.4698, -25, 228.728)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D100" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -11.4699, -20, 228.65)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D101" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -97.4697, -26, 228.818)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D102" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -116.47, -25, 228.855)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D103" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -76.4698, -20, 228.777)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D104" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 225.472, -20, -78.5889)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D105" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 225.472, -20, -99.5889)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D106" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 225.472, -20, 228.411)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D107" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 226.036, -26, 71.8811)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D108" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 226.073, -25, 90.8811)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D109" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 225.995, -20, 50.8812)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D110" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 225.907, -26, 5.88126)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D111" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 225.95, -25, 27.8812)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D112" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 225.866, -20, -15.1187)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D113" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 225.786, -26, -56.1186)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D114" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 225.823, -25, -37.1187)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D115" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 225.745, -20, -77.1186)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D116" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 226.163, -26, 136.881)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D117" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 226.2, -25, 155.881)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D118" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 226.122, -20, 115.881)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D119" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 226.29, -26, 201.881)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D120" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 226.327, -25, 220.881)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D121" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 226.249, -20, 180.881)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D122" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -243.528, -20, -78.5889)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D123" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -243.528, -20, -99.5889)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D124" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -243.528, -20, 228.411)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D125" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -242.964, -26, 71.8811)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D126" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -242.927, -25, 90.8811)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D127" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -243.005, -20, 50.8812)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D128" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -243.093, -26, 5.88126)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D129" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -243.05, -25, 27.8812)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D130" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -243.134, -20, -15.1187)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D131" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -243.214, -26, -56.1186)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D132" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -243.177, -25, -37.1187)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D133" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -243.255, -20, -77.1186)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D134" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -242.837, -26, 136.881)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D135" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -242.8, -25, 155.881)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D136" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -242.878, -20, 115.881)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D137" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -242.71, -26, 201.881)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D138" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -242.673, -25, 220.881)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D139" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -242.751, -20, 180.881)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D140" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -217.748, -20, -228.502)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D141" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -197.464, -20, -233.937)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D142" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -243.528, -20, 51.4111)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D143" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -242.964, -26, -105.119)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D144" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -242.927, -25, -86.1189)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D145" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -243.005, -20, -126.119)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D146" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -243.093, -26, -171.119)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D147" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -243.05, -25, -149.119)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D148" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -243.134, -20, -192.119)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D149" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -243.214, -26, -233.119)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D150" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -243.177, -25, -214.119)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D151" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.260707, 8.25125e-11, -0.965418, -8.33691e-14, 1, 8.54456e-11, 0.965418, -2.21955e-11, 0.260707, -219.098, -20, -227.858)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D152" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -242.837, -26, -40.119)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D153" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -242.8, -25, -21.119)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D154" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -242.878, -20, -61.119)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D155" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -242.71, -26, 24.8809)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D156" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -242.673, -25, 43.8808)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D157" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, -242.751, -20, 3.88092)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D158" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -222.117, -20, -211.061)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D159" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -243.117, -20, -211.061)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D160" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 84.8833, -20, -211.061)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D161" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -71.6467, -26, -211.625)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D162" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -52.6467, -25, -211.662)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D163" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -92.6466, -20, -211.584)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D164" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -137.647, -26, -211.496)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D165" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -115.647, -25, -211.539)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D166" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -158.646, -20, -211.455)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D167" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -199.646, -26, -211.375)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D168" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -180.646, -25, -211.412)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D169" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -220.646, -20, -211.334)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D170" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -6.64677, -26, -211.752)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D171" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, 12.3532, -25, -211.789)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D172" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -27.6467, -20, -211.711)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D173" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, 58.3531, -26, -211.879)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D174" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, 77.353, -25, -211.916)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D175" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, 37.3531, -20, -211.838)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D176" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -222.117, -20, 239.939)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D177" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -243.117, -20, 239.939)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D178" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 84.8833, -20, 239.939)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D179" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -71.6467, -26, 239.375)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D180" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -52.6467, -25, 239.338)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D181" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -92.6466, -20, 239.416)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D182" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -137.647, -26, 239.504)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D183" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -115.647, -25, 239.461)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D184" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -158.646, -20, 239.545)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D185" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -199.646, -26, 239.625)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D186" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -180.646, -25, 239.588)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D187" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -220.646, -20, 239.666)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D188" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -6.64677, -26, 239.248)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D189" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, 12.3532, -25, 239.211)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D190" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -27.6467, -20, 239.289)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D191" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, 58.3531, -26, 239.121)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D192" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, 77.353, -25, 239.084)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D193" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, 37.3531, -20, 239.162)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D194" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 141.883, -20, -215.061)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D195" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 120.883, -20, -215.061)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D196" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 228.286, -20, -28.7047)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D197" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 228.849, -26, -185.235)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D198" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 228.887, -25, -166.235)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D199" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 228.808, -20, -206.235)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D200" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, 226.353, -26, -215.496)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D201" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, -163.647, -25, -168.539)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D212" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -0.258819, 0.965926, -0.000505942, -0.965924, -0.258819, -0.0018882, 176.353, -25, 167.461)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D213" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -0.258819, 0.965926, -0.000505942, -0.965924, -0.258819, -0.0018882, -179.647, -25, 167.461)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D202" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, 205.354, -20, -215.455)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D203" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, 164.354, -26, -215.375)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D204" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, 183.354, -25, -215.412)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D205" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-0.00195481, -8.54456e-11, 0.999998, -8.33691e-14, 1, 8.54456e-11, -0.999998, 8.33942e-14, -0.00195481, 143.354, -20, -215.334)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D206" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 228.977, -26, -120.235)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D207" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 229.014, -25, -101.235)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D208" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 228.935, -20, -141.235)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D209" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 229.104, -26, -55.235)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D210" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 229.141, -25, -36.235)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D211" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.999998, -8.33835e-14, 0.00195477, -8.33691e-14, 1, 8.54456e-11, -0.00195477, -8.54456e-11, 0.999998, 229.063, -20, -76.2349)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(-0.00195474, 8.54456e-11, 0.999998, 8.33703e-14, 1, -8.54456e-11, -0.999998, -8.33729e-14, -0.00195474, 0.488788, 31, 151.531)
+shape = SubResource("BoxShape3D_gis1g")
+
+[node name="MeshInstance3D46" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 178, -20, 145)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D47" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185, -20, 150)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D63" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -166, -20, 170)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D64" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 162, -20, 170)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D48" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 0.530005, -26, 182.564)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D49" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -18.47, -25, 182.601)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D50" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 21.53, -20, 182.523)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D51" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 66.5299, -26, 182.435)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D52" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 44.5299, -25, 182.478)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D53" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 87.5298, -20, 182.394)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D54" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 128.53, -26, 182.314)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D55" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 109.53, -25, 182.351)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D56" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, 149.53, -20, 182.273)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D57" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -64.4699, -26, 182.691)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D58" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -83.4698, -25, 182.728)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D59" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -43.4699, -20, 182.65)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D60" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -129.47, -26, 182.818)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D61" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -148.47, -25, 182.855)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
+
+[node name="MeshInstance3D62" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.00195472, 8.54456e-11, -0.999998, -8.33691e-14, 1, 8.54456e-11, 0.999998, -8.33729e-14, 0.00195472, -108.47, -20, 182.777)
+layers = 4
+mesh = SubResource("SphereMesh_hjwn2")
+surface_material_override/0 = ExtResource("7_sly72")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 15, 20)
@@ -115,7 +1416,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, -25)
 curve = SubResource("Curve3D_fnw5v")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
-transform = Transform3D(0.00505381, 0, -0.999987, 0, 1, 0, 0.999987, 0, 0.00505381, -32.0078, 9, -33.9532)
+transform = Transform3D(0.201274, 0, 0.979534, 0, 1, 0, -0.979534, 0, 0.201274, 9.0693, 9, -69.1617)
 
 [node name="UserInterface" type="Control" parent="."]
 layout_mode = 3
@@ -302,7 +1603,7 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="Bench4" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
-transform = Transform3D(-1.73205, 0, -1, 0, 2, 0, 1, 0, -1.73205, 125, 0, 79)
+transform = Transform3D(-1.73205, 0, -1, 0, 2, 0, 1, 0, -1.73205, 116, 0, 79)
 collision_layer = 4
 collision_mask = 0
 
@@ -322,7 +1623,7 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="Bench7" parent="ParkElements/Benches" instance=ExtResource("14_mtyi4")]
-transform = Transform3D(-1.73205, 0, -1, 0, 2, 0, 1, 0, -1.73205, 111, 0, -112)
+transform = Transform3D(-1.73205, 0, -1, 0, 2, 0, 1, 0, -1.73205, 107, 0, -103)
 collision_layer = 4
 collision_mask = 0
 
@@ -796,17 +2097,17 @@ collision_mask = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59, 0, -152)
 
 [node name="Plant" parent="ParkElements/Flowers/FlowerElement27" instance=ExtResource("19_qmplu")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 24)
 collision_layer = 4
 collision_mask = 0
 
 [node name="Flower" parent="ParkElements/Flowers/FlowerElement27" instance=ExtResource("15_37vau")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 26)
 collision_layer = 4
 collision_mask = 0
 
 [node name="Flower2" parent="ParkElements/Flowers/FlowerElement27" instance=ExtResource("15_37vau")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 26)
 collision_layer = 4
 collision_mask = 0
 
@@ -814,17 +2115,17 @@ collision_mask = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59, 0, -152)
 
 [node name="Plant" parent="ParkElements/Flowers/FlowerElement28" instance=ExtResource("19_qmplu")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 17)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 24)
 collision_layer = 4
 collision_mask = 0
 
 [node name="Flower" parent="ParkElements/Flowers/FlowerElement28" instance=ExtResource("15_37vau")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 19)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 26)
 collision_layer = 4
 collision_mask = 0
 
 [node name="Flower2" parent="ParkElements/Flowers/FlowerElement28" instance=ExtResource("15_37vau")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 19)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4, 0, 26)
 collision_layer = 4
 collision_mask = 0
 
@@ -1014,17 +2315,17 @@ collision_mask = 0
 transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 131, 0, -152)
 
 [node name="Plant" parent="ParkElements/Plants/PlantElement10" instance=ExtResource("19_qmplu")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+transform = Transform3D(3, 0, -1.19209e-07, 0, 3, 0, 1.19209e-07, 0, 3, 22.6581, 0, 19.1931)
 collision_layer = 4
 collision_mask = 0
 
 [node name="Plant2" parent="ParkElements/Plants/PlantElement10" instance=ExtResource("19_qmplu")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+transform = Transform3D(3.99999, 8.81377e-11, 0.00781924, -8.87819e-11, 4, 3.3005e-10, -0.00781924, -3.30223e-10, 3.99999, 22.4443, 0, 9.11572)
 collision_layer = 4
 collision_mask = 0
 
 [node name="Plant3" parent="ParkElements/Plants/PlantElement10" instance=ExtResource("19_qmplu")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 22.658, 0, 14.1931)
 collision_layer = 4
 collision_mask = 0
 
@@ -1032,17 +2333,17 @@ collision_mask = 0
 transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, 71, 0, -152)
 
 [node name="Plant" parent="ParkElements/Plants/PlantElement11" instance=ExtResource("19_qmplu")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+transform = Transform3D(3, -6.65865e-11, 0.00586426, 6.61033e-11, 3, 2.47667e-10, -0.00586426, -2.47538e-10, 3, 25.2029, 0, -10.4512)
 collision_layer = 4
 collision_mask = 0
 
 [node name="Plant2" parent="ParkElements/Plants/PlantElement11" instance=ExtResource("19_qmplu")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 15, 0, 3)
+transform = Transform3D(3.99999, -8.87819e-11, 0.00781918, 8.81377e-11, 4, 3.30223e-10, -0.00781918, -3.3005e-10, 3.99999, 25.1834, 0, -20.4512)
 collision_layer = 4
 collision_mask = 0
 
 [node name="Plant3" parent="ParkElements/Plants/PlantElement11" instance=ExtResource("19_qmplu")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, 8)
+transform = Transform3D(4.99999, -1.10977e-10, 0.00977349, 1.10172e-10, 5, 4.12778e-10, -0.00977349, -4.12563e-10, 4.99999, 25.1932, 0, -15.4512)
 collision_layer = 4
 collision_mask = 0
 
@@ -1122,7 +2423,7 @@ collision_mask = 0
 transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -18, 0, 145)
 
 [node name="Plant" parent="ParkElements/Plants/PlantElement15" instance=ExtResource("19_qmplu")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15, 0, 13)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 12.1022, 0, 13.7765)
 collision_layer = 4
 collision_mask = 0
 
@@ -1239,25 +2540,25 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="RockElement3" type="Node3D" parent="ParkElements/Rocks"]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 134, 0, 47)
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 127, 0, 63)
 
 [node name="Rock" parent="ParkElements/Rocks/RockElement3" instance=ExtResource("16_al4ye")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 9, 0, -3)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.20576, 0, 1.5)
 collision_layer = 4
 collision_mask = 0
 
 [node name="Rock2" parent="ParkElements/Rocks/RockElement3" instance=ExtResource("17_eg38s")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 10, 0, -10)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.20576, 0, -5.5)
 collision_layer = 4
 collision_mask = 0
 
 [node name="Rock4" parent="ParkElements/Rocks/RockElement3" instance=ExtResource("17_eg38s")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, -9)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -4.79422, 0, -4.5)
 collision_layer = 4
 collision_mask = 0
 
 [node name="Rock3" parent="ParkElements/Rocks/RockElement3" instance=ExtResource("18_jb3al")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7, 0, -7)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.794235, 0, -2.5)
 collision_layer = 4
 collision_mask = 0
 

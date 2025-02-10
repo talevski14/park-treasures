@@ -11,7 +11,7 @@ extends Node
 
 var current_score = 0
 var score_to_win = 10
-var time_left = 100
+var time_left = 180
 
 var treasure_array = []
 

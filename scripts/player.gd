@@ -1,13 +1,13 @@
 extends CharacterBody3D
 
-@export var speed = 14
+@export var speed = 25
 @export var fall_acceleration = 75
 @export var pivot: Node3D
 @export var gem: Node3D
 @onready var anim_player = $Pivot/StylizedCharacter/AnimationPlayer
 
 var target_velocity = Vector3.ZERO
-@export var jump_impulse = 30
+@export var jump_impulse = 40
 
 var score = 0
 
