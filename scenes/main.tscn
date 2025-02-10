@@ -1,11 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://dnc18kgr4umpk"]
+[gd_scene load_steps=15 format=3 uid="uid://dnc18kgr4umpk"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_37plf"]
 [ext_resource type="PackedScene" uid="uid://depmb8nkigylh" path="res://scenes/player.tscn" id="1_a3mwd"]
+[ext_resource type="PackedScene" uid="uid://7vrnsqjmxgfm" path="res://scenes/treasure1.tscn" id="2_1m283"]
 [ext_resource type="PackedScene" uid="uid://cv4vv7cbc1d0r" path="res://art/environment/Daisy.fbx" id="2_ixomo"]
-[ext_resource type="PackedScene" uid="uid://cqfa5lr7ia3v3" path="res://scenes/treasure.tscn" id="4_x6v1r"]
+[ext_resource type="PackedScene" uid="uid://dfchdsl67gow7" path="res://scenes/treasure2.tscn" id="3_pbxxw"]
+[ext_resource type="PackedScene" uid="uid://cqfa5lr7ia3v3" path="res://scenes/treasure3.tscn" id="4_x6v1r"]
 [ext_resource type="Script" path="res://scripts/camera_pivot.gd" id="5_ggr46"]
+[ext_resource type="PackedScene" uid="uid://dh0ijdxhyept2" path="res://scenes/treasure4.tscn" id="5_spet3"]
 [ext_resource type="Script" path="res://scripts/score_label.gd" id="6_35e46"]
+[ext_resource type="PackedScene" uid="uid://c8y1bkmnvqopw" path="res://scenes/treasure5.tscn" id="6_vywc3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ufbyf"]
 size = Vector3(60, 2, 60)
@@ -25,7 +29,11 @@ default_font_size = 22
 
 [node name="Main" type="Node"]
 script = ExtResource("1_37plf")
-treasure_scene = ExtResource("4_x6v1r")
+treasure_scene_1 = ExtResource("2_1m283")
+treasure_scene_2 = ExtResource("3_pbxxw")
+treasure_scene_3 = ExtResource("4_x6v1r")
+treasure_scene_4 = ExtResource("5_spet3")
+treasure_scene_5 = ExtResource("6_vywc3")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

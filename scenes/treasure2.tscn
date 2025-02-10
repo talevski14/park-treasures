@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfchdsl67gow7"]
+
+[ext_resource type="Script" path="res://scripts/treasure.gd" id="1_dg7vv"]
+[ext_resource type="PackedScene" uid="uid://cyuo3tfitombi" path="res://art/treasure/Jewel_02.fbx" id="2_0ykxt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rhh3w"]
+size = Vector3(7, 6, 3)
+
+[node name="Treasure" type="CharacterBody3D" groups=["gems"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_dg7vv")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Jewel_02" parent="Pivot" instance=ExtResource("2_0ykxt")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_rhh3w")

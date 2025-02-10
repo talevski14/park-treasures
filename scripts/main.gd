@@ -1,8 +1,19 @@
 extends Node
 
-@export var treasure_scene: PackedScene
+@export var treasure_scene_1: PackedScene
+@export var treasure_scene_2: PackedScene
+@export var treasure_scene_3: PackedScene
+@export var treasure_scene_4: PackedScene
+@export var treasure_scene_5: PackedScene
+
+var treasure_array = []
+
+func _ready() -> void:
+	randomize()
+	treasure_array = [treasure_scene_1, treasure_scene_2, treasure_scene_3, treasure_scene_4, treasure_scene_5]
 
 func _on_treasure_collected() -> void:
+	var treasure_scene = treasure_array[randi() % treasure_array.size()]
 	var treasure = treasure_scene.instantiate()
 	var treasure_spawn_location = get_node("SpawnPath/SpawnLocation")
 	
