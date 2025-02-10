@@ -3,6 +3,7 @@ extends CharacterBody3D
 @export var speed = 14
 @export var fall_acceleration = 75
 @export var pivot: Node3D
+@export var gem: Node3D
 @onready var anim_player = $Pivot/StylizedCharacter/AnimationPlayer
 
 var target_velocity = Vector3.ZERO
@@ -57,13 +58,8 @@ func _physics_process(delta):
 			continue
 
 		if collision.get_collider().is_in_group("gems"):
-			var gem = collision.get_collider()
-			gem.collect()
+			var treasure = collision.get_collider()
+			treasure.collect()
 			break
 			
 	move_and_slide()
-
-
-func _on_treasure_collected() -> void:
-	score += 1
-	print(score)
