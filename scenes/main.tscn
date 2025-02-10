@@ -25,7 +25,7 @@ _data = {
 point_count = 12
 
 [sub_resource type="Theme" id="Theme_q12iw"]
-default_font_size = 22
+default_font_size = 50
 
 [node name="Main" type="Node"]
 script = ExtResource("1_37plf")
@@ -85,13 +85,25 @@ offset_bottom = 40.0
 [node name="ScoreLabel" type="Label" parent="UserInterface"]
 layout_mode = 0
 offset_left = 44.0
-offset_top = 38.0
-offset_right = 105.0
-offset_bottom = 61.0
+offset_top = 30.0
+offset_right = 232.0
+offset_bottom = 99.0
 theme = SubResource("Theme_q12iw")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Score: 0"
 script = ExtResource("6_35e46")
+
+[node name="TimerLabel" type="Label" parent="UserInterface"]
+layout_mode = 0
+offset_left = 994.0
+offset_top = 30.0
+offset_right = 1119.0
+offset_bottom = 129.0
+theme = SubResource("Theme_q12iw")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+script = ExtResource("6_35e46")
+
+[node name="Timer" type="Timer" parent="."]
 
 [connection signal="collected" from="Treasure" to="." method="_on_treasure_collected"]
 [connection signal="collected" from="Treasure" to="UserInterface/ScoreLabel" method="_on_treasure_collected"]
