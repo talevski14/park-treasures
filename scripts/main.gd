@@ -16,6 +16,7 @@ var time_left = 180
 var treasure_array = []
 
 func _ready() -> void:
+	$BackgroundMusic.play()
 	$UserInterface/Win.hide()
 	$UserInterface/Lose.hide()
 	
@@ -29,6 +30,7 @@ func _ready() -> void:
 
 func _on_treasure_collected() -> void:
 	current_score += 1
+	$CoinSound.play()
 	if current_score >= score_to_win:
 		winner()
 		
@@ -72,3 +74,7 @@ func winner():
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept") and ($UserInterface/Win.visible or $UserInterface/Lose.visible):
 		get_tree().reload_current_scene()
+
+
+func _on_background_music_finished() -> void:
+	$BackgroundMusic.play()

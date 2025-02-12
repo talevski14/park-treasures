@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dnc18kgr4umpk"]
+[gd_scene load_steps=32 format=3 uid="uid://dnc18kgr4umpk"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_37plf"]
 [ext_resource type="PackedScene" uid="uid://depmb8nkigylh" path="res://scenes/player.tscn" id="1_a3mwd"]
@@ -20,6 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://v4vdnhosabj2" path="res://scenes/environment_elements/rock2.tscn" id="17_eg38s"]
 [ext_resource type="PackedScene" uid="uid://jet8d67ymx8h" path="res://scenes/environment_elements/rock3.tscn" id="18_jb3al"]
 [ext_resource type="PackedScene" uid="uid://di4d6ptxyhvmb" path="res://scenes/environment_elements/plant.tscn" id="19_qmplu"]
+[ext_resource type="AudioStream" uid="uid://cnydkn8xpsbad" path="res://art/sounds/coin-recieved-230517.mp3" id="21_7e6e6"]
+[ext_resource type="AudioStream" uid="uid://bn7w12hlkqb1m" path="res://art/sounds/music-for-game-fun-kid-game-163649.mp3" id="22_7ql5w"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ccmmy"]
 sky_top_color = Color(0.302927, 0.467276, 0.599945, 1)
@@ -30,7 +32,8 @@ ground_horizon_color = Color(0.625732, 0.659069, 0.683236, 1)
 sky_material = SubResource("ProceduralSkyMaterial_ccmmy")
 
 [sub_resource type="Environment" id="Environment_rbeaa"]
-background_mode = 2
+background_mode = 1
+background_color = Color(0.308504, 0.546252, 0.640074, 1)
 sky = SubResource("Sky_j8gs8")
 sky_custom_fov = 130.8
 ambient_light_source = 3
@@ -41,7 +44,6 @@ fog_mode = 1
 fog_light_energy = 1.17
 fog_sun_scatter = 0.59
 fog_density = 0.0414
-fog_aerial_perspective = 0.842
 fog_sky_affect = 0.38
 fog_height = 21.56
 fog_depth_curve = 0.450625
@@ -1416,7 +1418,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, -25)
 curve = SubResource("Curve3D_fnw5v")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
-transform = Transform3D(0.201274, 0, 0.979534, 0, 1, 0, -0.979534, 0, 0.201274, 9.0693, 9, -69.1617)
+transform = Transform3D(0.201272, 0, 0.979534, 0, 1, 0, -0.979534, 0, 0.201272, 9.0693, 9, -69.1617)
 
 [node name="UserInterface" type="Control" parent="."]
 layout_mode = 3
@@ -2815,5 +2817,13 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7, 0, -7)
 collision_layer = 4
 collision_mask = 0
 
+[node name="CoinSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("21_7e6e6")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("22_7ql5w")
+autoplay = true
+
 [connection signal="collected" from="Treasure" to="." method="_on_treasure_collected"]
 [connection signal="collected" from="Treasure" to="UserInterface/ScoreLabel" method="_on_treasure_collected"]
+[connection signal="finished" from="BackgroundMusic" to="." method="_on_background_music_finished"]
